@@ -1,7 +1,7 @@
 var db = require('../database/database');
 
 module.exports.createUser = function (req, res) {
-    var query = "INSERT INTO users (username, user_password, email) VALUES ('" + req.body.username + "', '" + req.body.password + "', '" + req.body.email + "')";
+    var query = "INSERT INTO users (username, user_password, email) VALUES ('" + req.body.username + "', '" + req.body.user_password + "', '" + req.body.email + "')";   
     
     // Firing the query I just created
     db.query(query).spread(function (result, metadata) {
