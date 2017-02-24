@@ -8,7 +8,7 @@ module.exports.createUser = function (req, res) {
         // If successful, send 200 status and the message
         res.status(200).send("User was successfully created.");
     }).catch(function (err) {
-        // incase it is not sent. Send 500 status and the following message
+        // incase it is not sent. Send 500 status and the following message This is a change
         res.status(500).send("User was not created");
     })
 }
