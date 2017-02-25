@@ -20,3 +20,26 @@ module.exports.createUser = function (req, res) {
         res.status(500).send("User was not created");
     })
 }
+
+module.exports.login = function (req, res) {
+
+    var submittedPassword = req.body.password;
+
+    var query = "SELECT * FROM users WHERE username='" + req.body.loginName + "' OR email='" + req.body.loginName + "'";
+    db.query(query).spread(function (result, metadata) {
+        if (result.length > 0) {
+            var userData = result[0];
+            var isVerified = bcrypt.compareSync(userData.user_password, submittedPassword);
+
+            if (isVerified) {
+                res.json({
+                    data: userData
+                })
+            } else {
+                res.status(400).send("Incorrect Password");
+            }
+        }
+    }).catch(function (err) {
+        res.status(500).send("Unable to process query");
+    })
+}
